@@ -6,9 +6,9 @@ There are two competing specifications for this API: one from the [WHATWG](https
 
 If you just want to show notifications without getting down to the nitty-gritty of browser support, the following options should be rather safe to use - at least in desktop browsers:
 
-+ body(String) body}
-+ icon(String) icon}
-+ tag(String) tag}
++ body(String)
++ icon(String)
++ tag(String)
 + onClick(Runnable)
 + onError(Runnable)
 + timeout(Integer)
@@ -18,16 +18,16 @@ This extension needs to be attached to a UI and needs to request the user's perm
 
 Uses [notify.js](https://github.com/alexgibson/notify.js) by [Alex Gibson](http://alxgbsn.co.uk/).
 
-## Download release
-
-Official releases of this add-on are available at Vaadin Directory. For Maven instructions, download and reviews, go to http://vaadin.com/addon/TODO
-
 ## Example
 
     WebNotifications.create("Title")
       .body("Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.")
       .icon("theme://img/logo.png").tag("sometag")
       .onClick(() -> Notification.show("onClick")).show());
+
+## Download release
+
+Official releases of this add-on are available at Vaadin Directory. For Maven instructions, download and reviews, go to http://vaadin.com/addon/web-notifications-add-on-for-vaadin-8
 
 ## License
 
