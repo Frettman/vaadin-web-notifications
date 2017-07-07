@@ -3,7 +3,7 @@
 
   <groupId>de.codecamp.vaadin</groupId>
   <artifactId>web-notifications</artifactId>
-  <version>0.9.0</version>
+  <version>0.9.1-SNAPSHOT</version>
   <packaging>bundle</packaging>
 
   <name>Web Notifications Add-on for Vaadin 8</name>
@@ -38,7 +38,7 @@
     <url>https://github.com/${github.account}/${github.project}</url>
     <connection>scm:git:git://github.com/${github.account}/${github.project}.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:/${github.account}/${github.project}.git</developerConnection>
-    <tag>release-0.9.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
