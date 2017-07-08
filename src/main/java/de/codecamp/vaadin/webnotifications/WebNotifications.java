@@ -1,5 +1,6 @@
 package de.codecamp.vaadin.webnotifications;
 
+import java.io.Serializable;
 import java.lang.ref.WeakReference;
 import java.time.Instant;
 import java.util.Objects;
@@ -37,8 +38,8 @@ import elemental.json.impl.JreJsonFactory;
  * <li>{@link NotificationBuilder#body(String) body}</li>
  * <li>{@link NotificationBuilder#icon(String) icon}</li>
  * <li>{@link NotificationBuilder#tag(String) tag}</li>
- * <li>{@link NotificationBuilder#onClick(Runnable) onClick}</li>
- * <li>{@link NotificationBuilder#onError(Runnable) onError}</li>
+ * <li>{@link NotificationBuilder#onClick(de.codecamp.vaadin.webnotifications.WebNotifications.SerializableRunnable) onClick}</li>
+ * <li>{@link NotificationBuilder#onError(de.codecamp.vaadin.webnotifications.WebNotifications.SerializableRunnable) onError}</li>
  * <li>{@link NotificationBuilder#timeout(Integer) timeout}</li>
  * <li>{@link NotificationBuilder#closeOnClick(boolean) closeOnClick}</li>
  * </ul>
@@ -221,9 +222,9 @@ public class WebNotifications
 
     private String data;
 
-    private Runnable onClickCallback;
+    private SerializableRunnable onClickCallback;
 
-    private Runnable onErrorCallback;
+    private SerializableRunnable onErrorCallback;
 
 
     private Integer timeout;
@@ -401,7 +402,7 @@ public class WebNotifications
      *          the onClick callback
      * @return this notification builder
      */
-    public NotificationBuilder onClick(Runnable onClickCallback)
+    public NotificationBuilder onClick(SerializableRunnable onClickCallback)
     {
       this.onClickCallback = onClickCallback;
       return this;
@@ -419,7 +420,7 @@ public class WebNotifications
      *          the onError callback
      * @return this notification builder
      */
-    public NotificationBuilder onError(Runnable onErrorCallback)
+    public NotificationBuilder onError(SerializableRunnable onErrorCallback)
     {
       this.onErrorCallback = onErrorCallback;
       return this;
@@ -518,6 +519,11 @@ public class WebNotifications
       this.onClick = onClick;
       this.onError = onError;
     }
+  }
+
+  @FunctionalInterface
+  public interface SerializableRunnable extends Serializable, Runnable
+  {
   }
 
 }
