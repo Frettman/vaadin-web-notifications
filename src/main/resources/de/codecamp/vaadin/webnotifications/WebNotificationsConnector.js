@@ -23,8 +23,10 @@ window.de_codecamp_vaadin_webnotifications_WebNotifications = function() {
     	options.sound = self.translateVaadinUri(options.sound);
     }
 
-    if (options.hasOnClick) {
+    if (options.hasOnClick || options.focusOnClick) {
       options.notifyClick = function() {
+        if (options.focusOnClick)
+        	window.focus();
         self.onClickCallback(options.notificationId);
       };
     }

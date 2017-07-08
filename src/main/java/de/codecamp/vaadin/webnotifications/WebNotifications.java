@@ -42,6 +42,7 @@ import elemental.json.impl.JreJsonFactory;
  * <li>{@link NotificationBuilder#onError(de.codecamp.vaadin.webnotifications.WebNotifications.SerializableRunnable) onError}</li>
  * <li>{@link NotificationBuilder#timeout(Integer) timeout}</li>
  * <li>{@link NotificationBuilder#closeOnClick(boolean) closeOnClick}</li>
+ * <li>{@link NotificationBuilder#focusOnClick(boolean) focusOnClick}</li>
  * </ul>
  * <p>
  * This extension needs to be attached to a UI and needs to request the user's permission to show
@@ -229,7 +230,9 @@ public class WebNotifications
 
     private Integer timeout;
 
-    private boolean closeOnClick = true;
+    private boolean closeOnClick = false;
+
+    private boolean focusOnClick = false;
 
 
     private NotificationBuilder(String title)
@@ -396,6 +399,21 @@ public class WebNotifications
     }
 
     /**
+     * Whether clicking the notification should focus the browser window and the application's
+     * browser tab. This should also bring the browser window to the front, even if it's currently
+     * minimized; although that part didn't work in Edge for me.
+     *
+     * @param focusOnClick
+     *          whether to close on click
+     * @return this notification builder
+     */
+    public NotificationBuilder focusOnClick(boolean focusOnClick)
+    {
+      this.focusOnClick = focusOnClick;
+      return this;
+    }
+
+    /**
      * The callback when the notification is clicked.
      *
      * @param onClickCallback
@@ -488,9 +506,11 @@ public class WebNotifications
       // custom options offered by notify.js
       if (timeout != null)
         options.put("timeout", timeout);
+
       options.put("closeOnClick", closeOnClick);
 
       // custom properties
+      options.put("focusOnClick", focusOnClick);
       options.put("hasOnClick", onClickCallback != null);
       options.put("hasOnError", onErrorCallback != null);
 
