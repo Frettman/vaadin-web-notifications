@@ -54,11 +54,6 @@ public class WebNotifications
   extends AbstractJavaScriptExtension
 {
 
-  /**
-   *
-   */
-  private static final long serialVersionUID = 1L;
-
   /*
    * The weak references ensure there are no memory leaks, as there is no safe hook for cleaning up
    * the callbacks. It's possible that the callback is garbage collected too early, but considering
@@ -107,7 +102,7 @@ public class WebNotifications
    *
    * @param component
    *          the component that wishes to show a notification or at least the component that is
-   *          used to determine the UI
+   *          used to determine the UI; can be the UI itself
    * @param title
    *          the title of the notification
    * @return the {@link NotificationBuilder} to customize the notification before showing it
@@ -447,7 +442,9 @@ public class WebNotifications
             new WeakReference<>(new Callbacks(getOnClickCallback(), getOnErrorCallback())));
       }
 
-      callFunction("show", title, toOptionsJson());
+      getUI().access(() -> {
+        callFunction("show", title, toOptionsJson());
+      });
     }
 
 
